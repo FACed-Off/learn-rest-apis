@@ -14,6 +14,7 @@ function getDog(id) {
 
 function createDog(dog) {
   const id = Date.now();
+  //how does the spread operator work in this case
   return db.insert("dogs", { id, ...dog });
 }
 

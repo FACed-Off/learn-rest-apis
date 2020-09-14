@@ -20,10 +20,10 @@ function get(req, res, next) {
 }
 
 function post(req, res, next) {
-  //const newDoggy = req.body;
-
+  const newDoggy = req.body;
+  console.log(newDoggy);
   model
-    .createDog()
+    .createDog(newDoggy)
     .then((dog) => res.status(201).send(dog))
     .catch(next);
 }
