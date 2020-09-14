@@ -54,11 +54,15 @@ function insert(key, value) {
 
 function update(key, newValue, filterFn) {
   const table = db[key];
+  //if there is no filter function which check if id exists
   return new Promise((resolve, reject) => {
     if (!filterFn)
       return reject(new Error("Please provide a filter function to update"));
+    //if there is no key throw an error
     if (!table) return reject(new Error(`Table '${key}' not found`));
+    //finding the id inside the table
     const index = table.findIndex(filterFn);
+    //assigns newvalues to said id
     table[index] = Object.assign(table[index], newValue);
     return fsPromises
       .writeFile(dbPath, JSON.stringify(db, null, 2))
@@ -69,10 +73,14 @@ function update(key, newValue, filterFn) {
 function del(key, filterFn) {
   const table = db[key];
   return new Promise((resolve, reject) => {
+    //if there is no filter function which check if id exists
     if (!filterFn)
       return reject(new Error("Please provide a filter function to delete"));
+    //no table return error
     if (!table) return reject(new Error(`Table '${key}' not found`));
+    //filters the id that exists in the table
     const newTable = table.filter(filterFn);
+    //assigns db[key] to  newTable
     db[key] = newTable;
     return fsPromises
       .writeFile(dbPath, JSON.stringify(db, null, 2))
