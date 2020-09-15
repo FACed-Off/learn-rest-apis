@@ -12,7 +12,7 @@ try {
   if (!dbFileExists) {
     //creates a new file if the db.json file does not exist.
     //initalData - the value to convert to a string
-    //null -the stringified version of that value is used as the property's value.
+    //null (replacer function) - each value of the key-value pairs is not modified during stringify
     //2-indicate how many space characters to use as white space.
     fs.writeFileSync(dbPath, JSON.stringify(initialData, null, 2));
   }
