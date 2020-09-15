@@ -21,11 +21,18 @@ function get(req, res, next) {
 
 function post(req, res, next) {
   const newDoggy = req.body;
-  console.log(newDoggy);
   model
     .createDog(newDoggy)
     .then((dog) => res.status(201).send(dog))
     .catch(next);
 }
 
-module.exports = { getAll, get, post };
+function del(req, res, next) {
+  const dogId = req.params.id
+  model
+    .deleteDog(dogId)
+    .then(() => res.status(204).send())
+    .catch(next)
+}
+
+module.exports = { getAll, get, post, del };
