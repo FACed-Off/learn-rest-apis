@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken")
 const dotenv = require("dotenv")
 require("dotenv").config();
 const SECRET = process.env.JWT_SECRET;
+const model = require("../model/users")
 
 
 function verifyUser (req, res, next) {
@@ -30,6 +31,4 @@ function verifyUser (req, res, next) {
     }
 }
 
-module.exports = {
-    verifyUser
-}
+module.exports = verifyUser;
